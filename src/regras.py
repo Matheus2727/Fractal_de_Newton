@@ -12,7 +12,7 @@ class Regras:
         """testa a precisão de um metodo checando o quão proximo o resultado é do zero. numero deve ser um int
         ou float e func deve ser da classe Func. retorna True se o resultado for mais proximo de zero que a
         precisão estabelecida, senão retorna False"""
-        if abs(func.resolver(numero)) < self.prec:
+        if abs(func(numero)) < self.prec:
             return True
         
         return False

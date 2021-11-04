@@ -4,7 +4,7 @@ from regras import Regras
 class Newton:
     # contem o passo a passo do metodo de newton para achar a raize de uma função
     def __init__(self, func, regras, x0:complex=None):
-        """recebe as informaçoes iniciais. func é um objeto da classe Func,regras é um objeto Regras,
+        """recebe as informaçoes iniciais. func é um objeto da classe Poli, regras é um objeto Regras,
         e x0 é o x inicial"""
         self.func = func
         self.x0 = "" # o valor x atual onde sera aplicado o metodo de newton
@@ -22,8 +22,8 @@ class Newton:
         um resultado não ideal"""
         while self.tent < self.regras.maximo and not self.prec: # checa a precisão da iteração anterior e o numero atual de iterações
             self.tent += 1 # aumenta a iteração
-            func = self.func.resolver(self.x0) # o resultado da função no ponto
-            deriv = self.func.deriv(self.x0) # o resultado da derivada no ponto
+            func = self.func(self.x0) # o resultado da função no ponto
+            deriv = self.func.resolver(self.func.derivada, self.x0) # o resultado da derivada no ponto
             if deriv == 0: # filtrando o erro de "dividir por zero"
                 print("{} na derivada é zero".format(self.x0))
                 break
@@ -40,33 +40,3 @@ class Newton:
     
     def resultado_fin(self):
         return self.resultado_final
-
-def teste():
-    import func
-    import regras
-    raizes = [1j, 2, -3]
-    rg = regras.Regras(0.1, 100000)
-    fu = func.Func(lambda x: (x-1j)*(x-2)*(x+3), lambda x: 3*x**2 + (2-2j)*x - 6 + 1j, None)
-    re = Newton(fu, rg, 3)
-    re.loop()
-    print(re.resultado)
-
-    raizes_cores = {}
-    for i, x in enumerate(raizes):
-        raizes_cores[x] = rg.cores_possiveis[i]
-    
-    print(raizes_cores)
-
-    distancias = []
-    raa = re.resultado
-    for r in raizes:
-        distancias.append(abs(raa-r))
-    
-    menor_distancia = min(distancias)
-    for i, d in enumerate(distancias):
-        if d == menor_distancia:
-            print(raizes[i])
-            break
-
-if __name__ == "__main__":
-    teste()
