@@ -1,6 +1,3 @@
-from regras import Regras
-
-
 class Newton:
     # contem o passo a passo do metodo de newton para achar a raize de uma função
     def __init__(self, func, regras, x0:complex=None):
