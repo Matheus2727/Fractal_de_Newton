@@ -86,6 +86,18 @@ class Janela:
         else: # se um input não for escolhido o input ativo é desselecionado
             self.inpu = None
 
+    def salvar_imagem(self, quads:list):
+        sup = pygame.display.set_mode((700, 700))
+        for quad in quads:
+            pygame.draw.rect(sup, quad.cor, [
+                             quad.x, quad.y, quad.w, quad.h])
+
+        pygame.image.save_extended(sup, "aaa.png")
+        self.iniciar()
+
+    def carregar_imagem(self):
+        pass
+
     def atualizar_janela(self):
         """gera um novo frame para a janela e a atualiza"""
         self.screen.fill((200, 200, 200)) # cor de fundo
