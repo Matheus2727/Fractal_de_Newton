@@ -21,7 +21,7 @@ def preparar_imagem(**kwargs):
     nome = "raizes"
     raizes = localizar(janela, nome)
     ma = imagem.gerar_imagem(raizes)
-    setarquads(janela, ma)
+    setarquads(janela, ma, raizes)
 
 
 def limpar(**kwargs):
@@ -54,7 +54,7 @@ def setarinputs(janela: interface.Janela):
     janela.addInputs([inpu_raizes])
 
 
-def setarquads(janela: interface.Janela, mapa):
+def setarquads(janela: interface.Janela, mapa, raizes):
     """seta os quadrados (pixels da imagem) e os adiciona a janela"""
     print("iniciando imagem")
     cons = 1
@@ -64,7 +64,7 @@ def setarquads(janela: interface.Janela, mapa):
             quads.append(interface.Quadrado(ic, il, cons, cor))
 
     print("imagem pronta")
-    janela.salvar_imagem(quads)
+    janela.salvar_imagem(quads, raizes)
 
 
 def main():

@@ -1,4 +1,5 @@
 import pygame
+import os
 
 pygame.init()
 pygame.font.init()
@@ -86,13 +87,15 @@ class Janela:
         else: # se um input não for escolhido o input ativo é desselecionado
             self.inpu = None
 
-    def salvar_imagem(self, quads:list):
+    def salvar_imagem(self, quads:list, raizes):
         sup = pygame.display.set_mode((700, 700))
         for quad in quads:
             pygame.draw.rect(sup, quad.cor, [
                              quad.x, quad.y, quad.w, quad.h])
 
-        pygame.image.save_extended(sup, "aaa.png")
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        rodar_path = os.path.join(script_dir[:-4], "{}.png".format(raizes))
+        pygame.image.save_extended(sup, rodar_path)
         self.iniciar()
 
     def carregar_imagem(self):
